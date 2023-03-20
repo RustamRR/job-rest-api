@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    networks:
+      - default
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: admin
+      POSTGRES_DB: jobrestapp
+      POSTGRES_DB_TEST: jobrestapptest
+    volumes:
+      - ./db/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    ports:
+      - "25432:5432"
+
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    networks:
+      - default
+    ports:
+      - "26379:6379"
+    volumes:
+      - ./redis/data:/data
+
+networks:
+  default:
+    driver: bridge
