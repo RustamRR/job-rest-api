@@ -6,4 +6,8 @@ build:
 test:
 	go test -v -race -timeout 30s ./...
 
+.PHONY: docker
+docker:
+	docker compose -f ./build/docker-compose.local.yaml up -d
+
 .DEFAULT_GOAL := build

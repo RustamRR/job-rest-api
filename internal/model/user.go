@@ -35,6 +35,10 @@ type User struct {
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
+func (u *User) Sanitize() {
+	u.Password = ""
+}
+
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
 	if err := u.CreateEnrichment(); err != nil {
 		return err
