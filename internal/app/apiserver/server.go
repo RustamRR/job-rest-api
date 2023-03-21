@@ -2,6 +2,7 @@ package apiserver
 
 import (
 	"github.com/RustamRR/job-rest-api/internal/app/apiserver/controller/user"
+	"github.com/RustamRR/job-rest-api/internal/store"
 	"github.com/labstack/echo/v4"
 	"go.uber.org/zap"
 )
@@ -9,12 +10,14 @@ import (
 type Server struct {
 	router *echo.Echo
 	logger *zap.Logger
+	store  store.Store
 }
 
-func New(l *zap.Logger) *Server {
+func New(l *zap.Logger, s store.Store) *Server {
 	server := &Server{
 		router: echo.New(),
 		logger: l,
+		store:  s,
 	}
 
 	server.configureRouter()
@@ -26,5 +29,5 @@ func (s *Server) Run(port string) {
 }
 
 func (s *Server) configureRouter() {
-	user.InitRoutes(s.router)
+	user.InitRoutes(s.router, s.store)
 }

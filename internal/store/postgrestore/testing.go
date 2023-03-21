@@ -16,6 +16,13 @@ func TestConfig(t *testing.T) {
 	}
 }
 
+func TestStore(t *testing.T) *Store {
+	db := TestDB(t)
+	return &Store{
+		db: db,
+	}
+}
+
 func TestDB(t *testing.T) *gorm.DB {
 	config := viper.GetViper()
 	db, err := gorm.Open(postgres.Open(config.GetString("dsn")), &gorm.Config{})

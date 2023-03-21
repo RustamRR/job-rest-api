@@ -14,10 +14,7 @@ type UserRepositoryTestSuite struct {
 
 func (s *UserRepositoryTestSuite) SetupTest() {
 	TestConfig(s.T())
-	db := TestDB(s.T())
-	s.store = &Store{
-		db: db,
-	}
+	s.store = TestStore(s.T())
 
 	if err := s.store.Migrate(); err != nil {
 		s.T().Fatal(err)

@@ -2,6 +2,7 @@ package postgrestore
 
 import (
 	"github.com/RustamRR/job-rest-api/internal/model"
+	"github.com/RustamRR/job-rest-api/internal/store"
 	"gorm.io/gorm"
 )
 
@@ -16,7 +17,7 @@ func New(db *gorm.DB) *Store {
 	}
 }
 
-func (s *Store) User() *UserRepository {
+func (s *Store) User() store.UserRepository {
 	if s.userRepository == nil {
 		s.userRepository = &UserRepository{
 			store: s,
