@@ -50,7 +50,7 @@ func (s *UserModelTestSuite) TestUser_ValidationCreate() {
 			u: func() *User {
 				u := TestUser(s.T())
 				_ = u.CreateEnrichment()
-				u.Password = ""
+				u.HashedPassword = ""
 				return u
 			},
 			isValid: false,

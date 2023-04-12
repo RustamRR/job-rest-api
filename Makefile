@@ -4,7 +4,7 @@ build:
 
 .PHONY: test
 test:
-	go test -v -race -timeout 30s -run TestSuite$$ ./...
+	go test -v -race -timeout 30s -p 1 -run TestSuite$$ ./...
 
 .PHONY: docker
 docker:
