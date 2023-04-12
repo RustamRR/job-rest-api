@@ -14,10 +14,11 @@ var serverStore store.Store
 func InitRoutes(e *echo.Echo, store store.Store) {
 	serverStore = store
 
-	e.POST("/users", create)
-	e.GET("/users/:id", get)
-	e.GET("/users", getAll)
-	e.PATCH("/users/:id", update)
+	g := e.Group("/users")
+	g.POST("/", create)
+	g.GET("/:id", get)
+	g.GET("/", getAll)
+	g.PATCH("/:id", update)
 }
 
 func create(c echo.Context) error {
